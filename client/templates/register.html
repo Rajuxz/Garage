@@ -1,20 +1,32 @@
 {% extends "home.html" %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col col-md-6">
-
-                <form method="post">
+<div class="container">
+    <div>
+        <div class="row py-5 d-flex flex-row align-items-center justify-content-between ">
+            <div class="col col-md-4">
+                <span class="fs-4 ">Register User</span>
+                <form method="post" id="registerForm" class="mt-1 mb-2">
                     {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.user_name.label_tag }}
-                        {{ form.user_name }}
-                    </div>
-                    <!-- {{ form.as_p }} -->
-                    <button type="submit">Submit</button>
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Create Account</button>
                 </form>
+                <center><span class="fw-bold text-center">OR</span></center>
+                <span>Already have an account? <a href="#">Login</a></span> 
+            </div>
+            <div class="col col-md-5">
+                    <span class="text-success fw-bold" id="mapAlert">Please allow your location <br> access for better results.</span>
+                    <div>
+                        <div id="map" style="height: 250px;"></div>
+                    </div>
+
             </div>
         </div>
     </div>
+</div>
 
 {% endblock body %}
+{%load static%}
+{% block script %}
+<script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/validate.js' %}"></script>
+{% endblock script %}
