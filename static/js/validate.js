@@ -48,3 +48,8 @@ validator.addField('#id_user_name',[
         errorMessage: 'Choose a strong password.'
     }
 ])
+
+
+validator.onSuccess((e)=>{
+    e.target.submit()
+})
