@@ -1,0 +1,61 @@
+{% extends "../index.html" %}
+
+{% block body %}
+    <!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color:black;">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center py-5">
+          <div class="col-lg-6 mb-5 mb-lg-0 d-none d-sm-block">
+            <h1 class="my-5 display-3 fw-bold ls-tight">
+              Sajilo <br />
+              <span class="text-primary">Garage</span>
+            </h1>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+              quibusdam tempora at cupiditate quis eum maiores libero
+              veritatis? Dicta facilis sint aliquid ipsum atque?
+            </p>
+          </div>
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form class="mt-2" method="post">  
+                    <div class="mb-2 text-center">
+                        <span class="fs-3 fw-bold"> Welcome Again ! </span>
+                    </div>
+                  <!-- Email input -->
+                  {% csrf_token %}
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control border border-black" name="email" id="emailAddress" placeholder="name@example.com">
+                    <label for="emailAddress">Email address</label>
+                  </div>
+                  <!-- Password input -->
+                  <div class="form-floating mb-5">
+                    <input type="password" class="form-control border border-black" name="pasword" id="passwordInput" placeholder="Password">
+                    <label for="passwordInput">Password</label>
+                  </div>
+                  <!-- Submit button -->
+                  <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                    Log In
+                  </button>
+  
+                  <!-- Register buttons -->
+                   <div class="d-flex align-items-center justify-content-center">
+                       <span> No Account Yet? <br> 
+                            No worries ! <a href="{% url 'register' %}">Sign Up</a> </span>
+                   </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+{% endblock body %}
