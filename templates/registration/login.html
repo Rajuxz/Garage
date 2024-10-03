@@ -1,5 +1,12 @@
 {% extends "../index.html" %}
+{%block style%}
+  <style>
+    ul{
+      list-style-type: none;
+    }
+  </style>
 
+{%endblock style%}
 {% block body %}
     <!-- Section: Design Block -->
 <section class="">
@@ -27,17 +34,31 @@
                     <div class="mb-2 text-center">
                         <span class="fs-3 fw-bold"> Welcome Again ! </span>
                     </div>
-                  <!-- Email input -->
+                
                   {% csrf_token %}
+                  {% if form.non_field_errors %}
+                      <div class="text-danger">{{ form.non_field_errors }}</div>
+                  {% endif %}
+
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control border border-black" name="email" id="emailAddress" placeholder="name@example.com">
+                    {{form.username}}
                     <label for="emailAddress">Email address</label>
+                    {% if form.username.errors %} 
+                        <div class="text-danger">{{ form.username.errors }}</div>
+                    {% endif %}
                   </div>
                   <!-- Password input -->
                   <div class="form-floating mb-5">
-                    <input type="password" class="form-control border border-black" name="pasword" id="passwordInput" placeholder="Password">
+                    {{form.password}}
                     <label for="passwordInput">Password</label>
-                  </div>
+                    {% if form.password.errors %}
+                         <div class="text-danger">
+                          {% for error in forms.password.errors %}
+                            <p> {{ form.password.errors }} </p>
+                          {%endfor%}
+                        </div>
+                    {% endif %}
+                  </div> 
                   <!-- Submit button -->
                   <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
                     Log In
