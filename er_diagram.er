@@ -1,0 +1,107 @@
+[auth_group]
+    *id {label:"INTEGER"}
+    name {label:"VARCHAR(150)"}
+[auth_group_permissions]
+    *id {label:"INTEGER"}
+    group_id {label:"INTEGER"}
+    permission_id {label:"INTEGER"}
+[auth_permission]
+    *id {label:"INTEGER"}
+    codename {label:"VARCHAR(100)"}
+    content_type_id {label:"INTEGER"}
+    name {label:"VARCHAR(255)"}
+[django_content_type]
+    *id {label:"INTEGER"}
+    app_label {label:"VARCHAR(100)"}
+    model {label:"VARCHAR(100)"}
+[auth_user]
+    *id {label:"INTEGER"}
+    date_joined {label:"DATETIME"}
+    email {label:"VARCHAR(254)"}
+    first_name {label:"VARCHAR(30)"}
+    is_active {label:"BOOLEAN"}
+    is_staff {label:"BOOLEAN"}
+    is_superuser {label:"BOOLEAN"}
+    last_login {label:"DATETIME"}
+    last_name {label:"VARCHAR(150)"}
+    password {label:"VARCHAR(128)"}
+    username {label:"VARCHAR(150)"}
+[auth_user_groups]
+    *id {label:"INTEGER"}
+    group_id {label:"INTEGER"}
+    user_id {label:"INTEGER"}
+[auth_user_user_permissions]
+    *id {label:"INTEGER"}
+    permission_id {label:"INTEGER"}
+    user_id {label:"INTEGER"}
+[django_admin_log]
+    *id {label:"INTEGER"}
+    action_flag {label:"INTEGER"}
+    action_time {label:"DATETIME"}
+    change_message {label:"TEXT"}
+    content_type_id {label:"INTEGER"}
+    object_id {label:"TEXT"}
+    object_repr {label:"VARCHAR(200)"}
+    user_id {label:"INTEGER"}
+[django_migrations]
+    *id {label:"INTEGER"}
+    app {label:"VARCHAR(255)"}
+    applied {label:"DATETIME"}
+    name {label:"VARCHAR(255)"}
+[django_session]
+    *session_key {label:"VARCHAR(40)"}
+    expire_date {label:"DATETIME"}
+    session_data {label:"TEXT"}
+[vehicle_attendance]
+    *id {label:"INTEGER"}
+    date {label:"DATE"}
+    mechanic_id {label:"INTEGER"}
+    present_status {label:"VARCHAR(10)"}
+[vehicle_mechanic]
+    *id {label:"INTEGER"}
+    address {label:"VARCHAR(40)"}
+    mobile {label:"VARCHAR(20)"}
+    profile_pic {label:"VARCHAR(100)"}
+    salary {label:"INTEGER"}
+    skill {label:"VARCHAR(500)"}
+    status {label:"BOOLEAN"}
+    user_id {label:"INTEGER"}
+[vehicle_customer]
+    *id {label:"INTEGER"}
+    address {label:"VARCHAR(40)"}
+    mobile {label:"VARCHAR(20)"}
+    profile_pic {label:"VARCHAR(100)"}
+    user_id {label:"INTEGER"}
+[vehicle_feedback]
+    *id {label:"INTEGER"}
+    by {label:"VARCHAR(40)"}
+    date {label:"DATE"}
+    message {label:"VARCHAR(500)"}
+[vehicle_request]
+    *id {label:"INTEGER"}
+    category {label:"VARCHAR(50)"}
+    cost {label:"INTEGER"}
+    created_at {label:"DATE"}
+    customer_id {label:"INTEGER"}
+    date {label:"DATE"}
+    mechanic_id {label:"INTEGER"}
+    problem_description {label:"VARCHAR(500)"}
+    status {label:"VARCHAR(50)"}
+    vehicle_brand {label:"VARCHAR(40)"}
+    vehicle_model {label:"VARCHAR(40)"}
+    vehicle_name {label:"VARCHAR(40)"}
+    vehicle_no {label:"INTEGER"}
+auth_permission."id" 1--* auth_group_permissions."permission_id"
+auth_group."id" 1--* auth_group_permissions."group_id"
+django_content_type."id" 1--* auth_permission."content_type_id"
+auth_group."id" 1--* auth_user_groups."group_id"
+auth_user."id" 1--* auth_user_groups."user_id"
+auth_user."id" 1--* auth_user_user_permissions."user_id"
+auth_permission."id" 1--* auth_user_user_permissions."permission_id"
+django_content_type."id" ?--* django_admin_log."content_type_id"
+auth_user."id" 1--* django_admin_log."user_id"
+vehicle_mechanic."id" ?--* vehicle_attendance."mechanic_id"
+auth_user."id" 1--* vehicle_mechanic."user_id"
+auth_user."id" 1--* vehicle_customer."user_id"
+vehicle_customer."id" ?--* vehicle_request."customer_id"
+vehicle_mechanic."id" ?--* vehicle_request."mechanic_id"

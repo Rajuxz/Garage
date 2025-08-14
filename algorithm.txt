@@ -1,0 +1,55 @@
+Here is the algorithm for the code in simple steps:
+
+### Algorithm for Predicting Requests:
+
+**Step 1:**  
+- Retrieve the past year's data from the `Request` model, filtering by dates within the last 365 days.
+
+**Step 2:**  
+- Convert the retrieved data to a pandas DataFrame, including columns like `'date'`, `'category'`, and `'cost'`.
+
+**Step 3:**  
+- Print the raw data and check if the DataFrame is empty.  
+  - If empty, return an empty list, as no data is available for prediction.
+
+**Step 4:**  
+- Convert the `'date'` column in the DataFrame to a `datetime` format.  
+  - Handle any errors by setting invalid dates as `NaT` (Not a Time).  
+  - If there are any invalid date values (`NaT`), return an empty list.
+
+**Step 5:**  
+- Extract time-related features from the `'date'` column:  
+  - `day_of_week` (0 = Monday, 6 = Sunday)  
+  - `day` (the day of the month)
+
+**Step 6:**  
+- Aggregate the data by date to count the number of requests per day.  
+  - Also, keep the `day_of_week` and `day` columns by selecting the first occurrence for each date.
+
+**Step 7:**  
+- Check if there are at least 2 samples in the aggregated data.  
+  - If not, use the available data to generate future predictions directly without training a model.
+
+**Step 8:**  
+- If there are enough samples, separate the data into features (`day_of_week`, `day`) and the target variable (`requests_per_day`).
+
+**Step 9:**  
+- Split the data into training and test sets using an 80-20 ratio.
+
+**Step 10:**  
+- Train a linear regression model using the training data.
+
+**Step 11:**  
+- Create a DataFrame containing the next 7 days' dates, starting from tomorrow.  
+  - Extract `day_of_week` and `day` for these future dates.
+
+**Step 12:**  
+- Use the trained model to predict the number of requests for the next 7 days based on the features.
+
+**Step 13:**  
+- Add the predicted requests to the future dates DataFrame.
+
+**Step 14:**  
+- Return the predicted number of requests for the next 7 days as a list of tuples `(date, predicted_requests)`.
+
+This step-by-step algorithm explains how the prediction process works in a clear, simplified manner.

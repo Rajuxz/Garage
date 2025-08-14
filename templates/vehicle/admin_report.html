@@ -1,0 +1,62 @@
+{% extends 'vehicle/adminbase.html' %}
+{% block content %}
+<head>
+	<style type="text/css">
+		a{
+			text-decoration: none;
+			font-weight: 600;
+		}
+	</style>
+</head>
+<!-- main content -->
+<div class="wrapper">
+
+	<!-- ****** table  start ********** -->
+	<div class="row">
+		<div class="col-12 col-m-12 col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<div>
+						<h3 style="color:red; text-align:center">Reports</h3>
+					</div>
+					<div>
+						<a href="{% url 'daily-report' %}">Download 1 Day Report</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="{% url 'weekly-report' %}">Download 1 Week Report</a>
+					</div>
+				</div>
+				<div class="card-content">
+					<table>
+						<thead>
+							<tr>
+								<th>Vehicle Name</th>
+								<th>Vehicle Number</th>
+								<th>Status</th>
+								<th>Date</th>
+								<th>Cost</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for r in reports %}
+							<tr>
+								<td> {{r.vehicle_name}}</td>
+								<td> {{r.vehicle_no}}</td>
+								<td> {{r.status}}</td>
+								<td>{{r.date}}</td>
+								<td>{{r.cost}}</td>
+							</tr>
+							{% endfor %}
+							<tr>
+								<td colspan="4"><strong>Total Earnings</strong></td>
+								<td><strong>Rs: {{total_cost}}</strong></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ****** table start ********** -->
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<!-- end main content -->
+{% endblock content %}
